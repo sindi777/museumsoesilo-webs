@@ -45,7 +45,7 @@ export default function DetailKoleksi({ params }) {
   }
 
   return (
-    <section className="min-h-screen bg-white px-4 py-8 md:px-12 lg:px-20">
+    <section className="min-h-screen bg-[#EFE7DF] px-4 py-8 md:px-12 lg:px-20">
       {/* Tombol kembali */}
       <button
         onClick={() => router.back()}
@@ -54,7 +54,8 @@ export default function DetailKoleksi({ params }) {
         ←
       </button>
 
-      <div className="bg-white shadow rounded-lg p-6 flex flex-col md:flex-row gap-6">
+<div className="shadow rounded-lg p-6 flex flex-col md:flex-row gap-6">
+
         {/* Gambar koleksi */}
         <div className="md:w-1/2 w-full flex justify-center">
           <Image

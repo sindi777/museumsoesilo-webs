@@ -29,3 +29,9 @@ model koleksi {
   deskripsi     String
   createdAt DateTime @default(now())
 }
+
+model Pesan {
+  id        Int      @id @default(autoincrement())
+  isi       String
+  createdAt DateTime @default(now())
+}

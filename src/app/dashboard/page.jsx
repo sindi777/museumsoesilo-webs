@@ -10,26 +10,8 @@ export default function AdminDashboard() {
     {
       id: 1,
       message: 'Bagus sekali museumnya, sangat informatif!',
-      reply: '',
     },
   ])
-
-  const handleReplyChange = (id, value) => {
-    setFeedbacks((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, reply: value } : item
-      )
-    )
-  }
-
-  const handleSendReply = (id) => {
-    const replied = feedbacks.find((item) => item.id === id)
-    if (replied.reply.trim() !== '') {
-      alert(`Balasan untuk pesan ID ${id}:\n${replied.reply}`)
-    } else {
-      alert('Balasan tidak boleh kosong.')
-    }
-  }
 
   return (
     <div className="min-h-screen bg-[#F3E8DC] text-[#1E1E1E] font-sans px-4 py-6 sm:px-6 lg:px-8">
@@ -40,40 +22,21 @@ export default function AdminDashboard() {
       <h1 className="text-xl sm:text-2xl font-bold text-center mb-8">
         Dashboard Admin Museum
       </h1>
-      <button
-        onClick={() => router.back()}
-        className="text-xl mb-4 hover:opacity-70 transition"
-      >
-        ←
-      </button>
+      
       {/* Kritik & Saran */}
-      <section className="bg-white shadow rounded-lg p-4 sm:p-6 max-w-5xl mx-auto mb-10">
+      {/* <section className="bg-white shadow rounded-lg p-4 sm:p-6 max-w-5xl mx-auto mb-10">
         <h2 className="text-lg sm:text-xl font-semibold mb-4">Kritik & Saran Pengunjung</h2>
-        <ul className="space-y-6 text-sm sm:text-base">
+        <ul className="space-y-4 text-sm sm:text-base">
           {feedbacks.map((item) => (
             <li key={item.id} className="border rounded p-4 bg-gray-50">
-              <p className="italic mb-2">"{item.message}"</p>
-              <label className="block mb-1 text-sm font-medium">Balas:</label>
-              <textarea
-                value={item.reply}
-                onChange={(e) => handleReplyChange(item.id, e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded mb-2"
-                rows={2}
-                placeholder="Tulis balasan untuk pengunjung..."
-              />
-              <button
-                onClick={() => handleSendReply(item.id)}
-                className="bg-[#3B2C24] text-white text-sm px-4 py-1 rounded hover:bg-[#2a1d18] transition"
-              >
-                Kirim Balasan
-              </button>
+              <p className="italic">"{item.message}"</p>
             </li>
           ))}
         </ul>
-      </section>
+      </section> */}
 
       {/* Koleksi Museum */}
-      <section className="bg-white shadow rounded-lg p-4 sm:p-6 max-w-6xl mx-auto">
+      {/* <section className="bg-white shadow rounded-lg p-4 sm:p-6 max-w-6xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <h2 className="text-lg sm:text-xl font-semibold">Kelola Koleksi Museum</h2>
           <button className="bg-[#3B2C24] text-white px-4 py-2 rounded hover:bg-[#2a1d18]">
@@ -97,8 +60,8 @@ export default function AdminDashboard() {
               </div>
             </div>
           ))}
-        </div>
-      </section>
+        </div> */}
+      {/* </section> */}
     </div>
   )
 }

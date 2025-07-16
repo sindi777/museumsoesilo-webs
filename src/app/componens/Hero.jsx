@@ -7,9 +7,9 @@ export default function Hero() {
   const router = useRouter()
 
   return (
-    <section className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px]">
+    <section id='hero' className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px]">
       <Image
-        src="/museum-6.webp"
+        src="/entrance museum.jpeg"
         alt="Museum Soesilo"
         fill
         className="object-cover"

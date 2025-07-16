@@ -12,8 +12,9 @@ export default function PanoramaViewer() {
 
     const viewer = new Viewer({
       container: viewerRef.current,
-      panorama: '/360/gambar360.jpg',
+      panorama: '/360/pano2.jpg',
       defaultYaw: 0,
+      defaultFov: 90,
       loadingImg: '/logo.png',
       navbar: [
         'zoom',

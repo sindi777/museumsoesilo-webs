@@ -1,12 +1,16 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSession, signOut } from 'next-auth/react'
+import Link from 'next/link'
 
 export default function Navbar() {
-  const router = useRouter()
+  const { data: session, status } = useSession()
   const [isOpen, setIsOpen] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+ 
 
   return (
     <header className="fixed top-0 left-0 w-full bg-[#EFE7DF] text-[#1E1E1E] font-sans shadow-md z-50">
@@ -27,21 +31,21 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-6 items-center font-semibold text-sm md:text-base">
-          <li><a href="#" className="hover:underline" onClick={() => router.push('/')}>Beranda</a></li>
-          <li><a href="#" className="hover:underline"onClick={() => router.push('/detail-koleksi')}>Koleksi</a></li>
-          <li><a href="#" className="hover:underline"onClick={() => router.push('/detail-kontak')}>Kontak</a></li>
-          <li><a href="#" className="hover:underline"onClick={() => router.push('/detail-informasi')}>Informasi Museum</a></li>
+          <li><a href="/" className="hover:underline">Beranda</a></li>
+          <li><a href="/detail-koleksi" className="hover:underline">Koleksi</a></li>
+          <li><a href="#contact" className="hover:underline">Umpan Balik</a></li>
+          <li><a href="/detail-informasi" className="hover:underline">Informasi Museum</a></li>
           <li>
-            <button
-              onClick={() => router.push('/login')}
-              className="bg-black text-white px-4 py-2 rounded-full hover:scale-105 transition"
-            >
-              Login
-            </button>
+            <Link
+                href="/login"
+                className="bg-black text-white px-4 py-2 rounded-full hover:scale-105 transition"
+              >
+                Login
+              </Link>
           </li>
         </ul>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden p-2 text-xl"
@@ -50,20 +54,29 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Dropdown */}
+      {/* Mobile Menu Dropdown */}
       {isOpen && (
         <ul className="md:hidden px-4 pb-4 space-y-2 font-semibold text-sm">
-          <li><a href="#" className="block hover:underline"onClick={() => router.push('/')}>Beranda</a></li>
-          <li><a href="#" className="block hover:underline"onClick={() => router.push('/detail-koleksi')}>Koleksi</a></li>
-          <li><a href="#" className="block hover:underline"onClick={() => router.push('/detail-kontak')}>Kontak</a></li>
-          <li><a href="#" className="block hover:underline"onClick={() => router.push('/detail-informasi')}>Informasi Museum</a></li>
+          <li><a href="/" className="block hover:underline">Beranda</a></li>
+          <li><a href="/detail-koleksi" className="block hover:underline">Koleksi</a></li>
+          <li><a href="#contact" className="block hover:underline">Umpan Balik</a></li>
+          <li><a href="/detail-informasi" className="block hover:underline">Informasi Museum</a></li>
           <li>
-            <button
-              onClick={() => router.push('/login')}
-              className="bg-black text-white px-4 py-2 w-full rounded-full mt-2"
-            >
-              Login
-            </button>
+            {isLoggedIn ? (
+              <button
+                onClick={handleLogout}
+                className="bg-red-600 text-white px-4 py-2 w-full block text-center rounded-full mt-2"
+              >
+                Logout
+              </button>
+            ) : (
+              <a
+                href="/login"
+                className="bg-black text-white px-4 py-2 w-full block text-center rounded-full mt-2"
+              >
+                Login
+              </a>
+            )}
           </li>
         </ul>
       )}

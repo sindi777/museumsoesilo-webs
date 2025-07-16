@@ -2,98 +2,54 @@
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { prisma } from '@/lib/prisma'
 
-const koleksi = [
-  {
-    id: 1,
-    nama: 'Amoghapasa',
-    gambar: '/koleksi/amoghapasa.png',
-    deskripsi: 'Prasasti Amoghapasa diukir pada alas arca Amoghapasa. Alas ditemukan di Padang Roco, Sumatra Barat.',
-  },
-  {
-    id: 2,
-    nama: 'Belincung',
-    gambar: '/koleksi/belincung.png',
-    deskripsi: 'Kapak batu belincung ini merupakan contoh alat dari Neolitik Beliung. Setelah meneliti lebih de...',
-  },
-  {
-    id: 3,
-    nama: 'Arca Bhairawa',
-    gambar: '/koleksi/bhairawa.png',
-    deskripsi: 'Arca Bhairawa adalah representasi dewa dari aliran Tantra yang merupakan contoh sinkretisme atau gab ...',
-  },
-  {
-    id: 4,
-    nama: 'Prasasti Ciaruteun',
-    gambar: '/koleksi/ciaruteun.png',
-    deskripsi: 'Di tempat asalnya, prasasti ini ditemukan di pinggir Sungai Ciaruteun, Bogor. Prasasti ini merupakan ...',
-  },
-  {
-    id: 5,
-    nama: 'Prasasti Ciaruteun',
-    gambar: '/koleksi/ciaruteun.png',
-    deskripsi: 'Di tempat asalnya, prasasti ini ditemukan di pinggir Sungai Ciaruteun, Bogor. Prasasti ini merupakan ...',
-  },
-  {
-    id: 6,
-    nama: 'Prasasti Ciaruteun',
-    gambar: '/koleksi/ciaruteun.png',
-    deskripsi: 'Di tempat asalnya, prasasti ini ditemukan di pinggir Sungai Ciaruteun, Bogor. Prasasti ini merupakan ...',
-  },
-  {
-    id: 7,
-    nama: 'Prasasti Ciaruteun',
-    gambar: '/koleksi/ciaruteun.png',
-    deskripsi: 'Di tempat asalnya, prasasti ini ditemukan di pinggir Sungai Ciaruteun, Bogor. Prasasti ini merupakan ...',
-  },
-  {
-    id: 8,
-    nama: 'Prasasti Ciaruteun',
-    gambar: '/koleksi/ciaruteun.png',
-    deskripsi: 'Di tempat asalnya, prasasti ini ditemukan di pinggir Sungai Ciaruteun, Bogor. Prasasti ini merupakan ...',
-  },
-  {
-    id: 9,
-    nama: 'Prasasti Ciaruteun',
-    gambar: '/koleksi/ciaruteun.png',
-    deskripsi: 'Di tempat asalnya, prasasti ini ditemukan di pinggir Sungai Ciaruteun, Bogor. Prasasti ini merupakan ...',
-  },
-  {
-    id: 10,
-    nama: 'Prasasti Ciaruteun',
-    gambar: '/koleksi/ciaruteun.png',
-    deskripsi: 'Di tempat asalnya, prasasti ini ditemukan di pinggir Sungai Ciaruteun, Bogor. Prasasti ini merupakan ...',
-  },
-  {
-    id: 11,
-    nama: 'Prasasti Ciaruteun',
-    gambar: '/koleksi/ciaruteun.png',
-    deskripsi: 'Di tempat asalnya, prasasti ini ditemukan di pinggir Sungai Ciaruteun, Bogor. Prasasti ini merupakan ...',
-  },
-  {
-    id: 12,
-    nama: 'Prasasti Ciaruteun',
-    gambar: '/koleksi/ciaruteun.png',
-    deskripsi: 'Di tempat asalnya, prasasti ini ditemukan di pinggir Sungai Ciaruteun, Bogor. Prasasti ini merupakan ...',
-  },
-]
-export default function VirtualCollection() {
+// const koleksi = [
+//   {
+//     id: 1,
+//     nama: 'Amoghapasa',
+//     gambar: '/koleksi/amoghapasa.png',
+//     deskripsi: 'Prasasti Amoghapasa diukir pada alas arca Amoghapasa. Alas ditemukan di Padang Roco, Sumatra Barat.',
+//   },
+//   {
+//     id: 2,
+//     nama: 'Belincung',
+//     gambar: '/koleksi/belincung.png',
+//     deskripsi: 'Kapak batu belincung ini merupakan contoh alat dari Neolitik Beliung. Setelah meneliti lebih de...',
+//   },
+//   {
+//     id: 3,
+//     nama: 'Arca Bhairawa',
+//     gambar: '/koleksi/bhairawa.png',
+//     deskripsi: 'Arca Bhairawa adalah representasi dewa dari aliran Tantra yang merupakan contoh sinkretisme atau gab ...',
+//   },
+//   {
+//     id: 4,
+//     nama: 'Prasasti Ciaruteun',
+//     gambar: '/koleksi/ciaruteun.png',
+//     deskripsi: 'Di tempat asalnya, prasasti ini ditemukan di pinggir Sungai Ciaruteun, Bogor. Prasasti ini merupakan ...',
+//   },
+// ]
+export default async function VirtualCollection() {
     const router = useRouter()
+    const koleksi = await prisma.koleksi.findMany({
+        orderBy: { createdAt: 'desc' },
+      })
   return (
     
-    <section className="row min-h-screen bg-white px-4 py-10 sm:px-6 lg:px-12">
-    <button
+    <section className="row min-h-screen bg-[#EFE7DF] px-4 py-10 sm:px-6 lg:px-12">
+    {/* <button
         onClick={() => router.back()}
         className="text-xl mb-4 hover:opacity-70 transition"
       >
         ←
-    </button>    
+    </button>     */}
       <h1 className="text-2xl font-bold mb-8">Koleksi Museum</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {koleksi.map((item) => (
           <div
             key={item.id}
-            className="bg-white border rounded-xl shadow hover:shadow-lg transition duration-300 overflow-hidden"
+            className="bg-white border rounded-xl shadow hover:shadow-lg transition duration-300 overflow-hidden" onClick={() => router.push(`/list-koleksi/${item.id}`)}
           >
             <div className="p-4 flex justify-center items-center">
               <Image
