@@ -2,12 +2,12 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Navbar from './componens/Navbar';
-import View from './componens/view';
-import Koleksi from './componens/koleksi';
-import Footer from './componens/footer';
-import Hero from './componens/Hero';
-import Pesan from './componens/Pesan';
+import Navbar from '@/app/componens/Navbar';
+import View from '@/app/componens/view';
+import Koleksi from '@/app/componens/koleksi';
+import Footer from '@/app/componens/footer';
+import Hero from '@/app/componens/Hero';
+import Pesan from '@/app/componens/Pesan';
 
 export default function Home() {
   const router = useRouter();
