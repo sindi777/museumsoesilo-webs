@@ -1,10 +1,24 @@
 import { prisma } from '@/lib/prisma'
 import { createClient } from '@supabase/supabase-js'
+import { NextResponse } from 'next/server'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY // pakai service role agar bisa upload
+  process.env.SUPABASE_SERVICE_ROLE_KEY 
 )
+
+
+export async function GET() {
+  try {
+    const koleksi = await prisma.Koleksi.findMany({
+      orderBy: { createdAt: 'desc' },
+    })
+    return NextResponse.json(koleksi)
+  } catch (error) {
+    console.error('Prisma fetch error:', error)
+    return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 })
+  }
+}
 
 export async function POST(request) {
   try {
