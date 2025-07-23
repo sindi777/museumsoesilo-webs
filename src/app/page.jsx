@@ -3,9 +3,9 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Navbar from '@/app/componens/Navbar';
-import View from '@/app/componens/view';
-import Koleksi from '@/app/componens/koleksi';
-import Footer from '@/app/componens/footer';
+import View from '@/app/componens/View';
+import Koleksi from '@/app/componens/Koleksi';
+import Footer from '@/app/componens/Footer';
 import Hero from '@/app/componens/Hero';
 import Pesan from '@/app/componens/Pesan';
 
