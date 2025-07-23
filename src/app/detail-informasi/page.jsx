@@ -9,18 +9,11 @@ export default function TentangMuseum() {
   const router = useRouter()
 
   return (
-    <section className="bg-[#EFE7DF] min-h-screen px-4 md:px-10 py-12">
+    <section className="bg-white min-h-screen pt-20 px-4 md:px-10 py-12">
       <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-start gap-8">
         
-        {/* Tombol Kembali & Gambar */}
+        {/* Gambar Museum */}
         <div className="relative w-full md:w-1/3">
-          {/* <button
-            onClick={() => router.back()}
-            className="absolute -top-3 -left-18 text-2xl text-gray-600 hover:text-black"
-          >
-            ←
-          </button> */}
-
           <Image
             src="/bapak-soesilo.jpg"
             alt="Jenderal Soesilo Soedarman"
@@ -39,23 +32,23 @@ export default function TentangMuseum() {
           <p className="text-justify text-sm md:text-base leading-relaxed">
             Jenderal Soesilo Soedarman bertindak di kemapanan militer Indonesia sejak 1945 sebagai Kadet di Akademi Militer Yogyakarta, dan bergabung dengan kampanye gerilya di Jawa Barat dan di sekitar Daerah Ibu Kota Yogyakarta selama Perang Kemerdekaan (1945 – 1948). Dia dan unitnya, SWK-104, Werkhreise III, berpartisipasi dalam keberhasilan serangan 1 Maret 1949 di Ibu Kota Yogyakarta di bawah kepemimpinan Kolonel Soeharto, Panglima Brigade Werkhreise III, dan kemudian menjadi Presiden RI ke-2.
           </p>
+
           <h3 className="mt-6 font-semibold text-lg mb-2 flex items-center gap-2">
-          <FaRegClock size={20} className="text-[#3B2C24]" />
-          Jam Operasional
+            <FaRegClock size={20} className="text-[#3B2C24]" />
+            Jam Operasional
           </h3>
-            <p className="text-gray-700 leading-relaxed">
-            Senin - Jumat: 08.00 - 16.00 WIB<br />
-            Sabtu - Minggu: 09.00 - 14.00 WIB<br />
-            Hari Libur Nasional: Tutup
-            </p>
-            <h3 className="mt-5 font-semibold text-lg mb-2 flex items-center gap-2">
-          <FaMoneyBillWave size={20} className="text-green-600" />
-          Harga Tiket
+          <p className="text-gray-700 leading-relaxed">
+            Setiap Hari: 09.00 - 16.00 WIB<br />
+          </p>
+
+          <h3 className="mt-5 font-semibold text-lg mb-2 flex items-center gap-2">
+            <FaMoneyBillWave size={20} className="text-green-600" />
+            Harga Tiket
           </h3>
-            <p className="flex items-center gap-2 text-gray-700">
-              Tiket untuk masuk ke dalam Museum Soesilo Soedarman berkisar: <br />
-              Rp.7000 untuk dewasa <br /> 
-              Rp.5000 untuk anak - anak
+          <p className="flex items-start gap-2 text-gray-700 leading-relaxed">
+            Tiket untuk masuk ke dalam Museum Soesilo Soedarman berkisar: <br />
+            Rp. 5.000 untuk Umum <br />
+            Rp. 3.000 untuk bookingan anak sekolah
           </p>
         </div>
       </div>

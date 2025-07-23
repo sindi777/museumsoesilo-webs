@@ -12,7 +12,7 @@ const handler = NextAuth({
       async authorize(credentials) {
         const { email, password } = credentials
 
-        // GANTI: logika autentikasi asli sesuai database kamu
+        // Ganti logika autentikasi 
         if (email === "admin@example.com" && password === "admin123") {
           return {
             id: "1",
@@ -21,7 +21,6 @@ const handler = NextAuth({
           }
         }
 
-        // Jika gagal login
         return null
       },
     }),

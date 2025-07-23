@@ -1,14 +1,21 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function FormKoleksi() {
+export default function FormKoleksi({ initialData = null, onFinish }) {
   const [nama, setNama] = useState('')
   const [deskripsi, setDeskripsi] = useState('')
   const [gambarFile, setGambarFile] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const router = useRouter()
+
+  useEffect(() => {
+    if (initialData) {
+      setNama(initialData.nama)
+      setDeskripsi(initialData.deskripsi)
+    }
+  }, [initialData])
 
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -23,23 +30,24 @@ export default function FormKoleksi() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    const base64 = await convertToBase64(gambarFile)
+    let base64 = initialData?.gambar
+    if (gambarFile) {
+      base64 = await convertToBase64(gambarFile)
+    }
 
-    const res = await fetch('/api/koleksi', {
-      method: 'POST',
+    const method = initialData ? 'PUT' : 'POST'
+    const endpoint = initialData
+      ? `/api/koleksi/${initialData.id}`
+      : '/api/koleksi'
+
+    const res = await fetch(endpoint, {
+      method,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        nama,
-        deskripsi,
-        gambar: base64,
-      }),
+      body: JSON.stringify({ nama, deskripsi, gambar: base64 }),
     })
 
-    if (res.ok) {
-      setNama('')
-      setDeskripsi('')
-      setGambarFile(null)
-      router.refresh()
+    if (res.ok && onFinish) {
+      onFinish() 
     }
 
     setIsSubmitting(false)
@@ -60,7 +68,7 @@ export default function FormKoleksi() {
         accept="image/*"
         onChange={(e) => setGambarFile(e.target.files[0])}
         className="w-full border px-4 py-2 rounded"
-        required
+        {...(initialData ? {} : { required: true })}
       />
       <textarea
         placeholder="Deskripsi Koleksi"
@@ -75,7 +83,11 @@ export default function FormKoleksi() {
         disabled={isSubmitting}
         className="bg-[#3B2C24] text-white px-6 py-2 rounded hover:bg-[#4b3830]"
       >
-        {isSubmitting ? 'Menyimpan...' : 'Simpan Koleksi'}
+        {isSubmitting
+          ? 'Menyimpan...'
+          : initialData
+          ? 'Simpan Perubahan'
+          : 'Simpan Koleksi'}
       </button>
     </form>
   )

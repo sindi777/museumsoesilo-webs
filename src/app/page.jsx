@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Navbar from './componens/navbar';
+import Navbar from './componens/Navbar';
 import View from './componens/view';
 import Koleksi from './componens/koleksi';
 import Footer from './componens/footer';
@@ -13,7 +13,7 @@ export default function Home() {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
 
-  // ⬇️ Show button when page is scrolled down
+  
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
@@ -27,7 +27,6 @@ export default function Home() {
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  // ⬇️ Scroll to top function
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -36,7 +35,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[#33231A] text-[#1E1E1E] font-sans">
+    <main className="bg-[#FFFFFF] text-[#1E1E1E] font-sans">
       <Navbar/>
       <Hero/>
       <View/>
@@ -47,11 +46,11 @@ export default function Home() {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-5 right-5 p-3 rounded-full bg-[#EFE7DF] text-[#33231A] shadow-lg hover:bg-[#d6ccc2] transition duration-300"
+          className="fixed bottom-5 right-5 p-3 rounded-full bg-[#d6ccc2] text-[#33231A] shadow-lg hover:bg-[#33231A] transition duration-300"
         >
           ↑
         </button>
       )}
-    </div>
+    </main>
   );
 }

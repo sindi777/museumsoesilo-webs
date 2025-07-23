@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
@@ -7,9 +8,9 @@ export default function Hero() {
   const router = useRouter()
 
   return (
-    <section id='hero' className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px]">
+   <section id="hero" className="relative w-full h-screen pt-2 sm:h-[500px] md:h-[600px] lg:h-[700px]">
       <Image
-        src="/entrance museum.jpeg"
+        src="/koleksi2b.jpg"
         alt="Museum Soesilo"
         fill
         className="object-cover"
@@ -27,12 +28,12 @@ export default function Hero() {
           </div>
 
           {/* Tombol Selengkapnya */}
-          <button
-            onClick={() => router.push('/detail-informasi')}
-            className="bg-black text-white px-5 md:px-6 py-2 rounded-full hover:bg-gray-800 transition text-sm md:text-base"
-          >
-            Selengkapnya
-          </button>
+          <Link
+  href="/detail-informasi"
+  className="inline-block bg-black text-white px-5 md:px-6 py-2 rounded-full hover:bg-gray-800 transition text-sm md:text-base"
+>
+  Selengkapnya
+</Link>
         </div>
       </div>
     </section>

@@ -7,20 +7,16 @@ export async function POST(request) {
     const body = await request.json()
     const { nama, deskripsi, gambar } = body
 
-    // Ubah base64 ke buffer
     const base64Data = gambar.replace(/^data:image\/\w+;base64,/, '')
     const buffer = Buffer.from(base64Data, 'base64')
 
-    // Buat nama file unik
     const fileName = `${Date.now()}.png`
     const filePath = path.join(process.cwd(), 'public', 'uploads', fileName)
 
-    // Simpan file
     await writeFile(filePath, buffer)
 
     const imagePath = `/uploads/${fileName}`
 
-    // Simpan ke database
     await prisma.koleksi.create({
       data: {
         nama,
@@ -33,5 +29,24 @@ export async function POST(request) {
   } catch (error) {
     console.error('Upload error:', error)
     return new Response(JSON.stringify({ error: 'Upload gagal' }), { status: 500 })
+  }
+}
+
+
+export async function GET() {
+  try {
+    const koleksiList = await prisma.koleksi.findMany({
+      orderBy: { createdAt: 'desc' },
+    })
+
+    return new Response(JSON.stringify(koleksiList), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  } catch (error) {
+    console.error('Fetch error:', error)
+    return new Response(JSON.stringify({ error: 'Gagal mengambil data' }), {
+      status: 500,
+    })
   }
 }

@@ -1,4 +1,4 @@
-// /app/api/login/route.js
+
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '@/generated/prisma'
 import bcrypt from 'bcrypt'
@@ -22,13 +22,13 @@ export async function POST(request) {
       return NextResponse.json({ message: 'Password salah' }, { status: 401 })
     }
 
-    // Set cookie token
+    
     cookies().set({
       name: 'token',
-      value: 'sesi-login-admin', // Ganti dengan JWT jika perlu
+      value: 'sesi-login-admin', 
       httpOnly: true,
       path: '/',
-      maxAge: 60 * 60 * 24, // 1 hari
+      maxAge: 60 * 60 * 24, 
     })
 
     return NextResponse.json({ message: 'Login berhasil' })

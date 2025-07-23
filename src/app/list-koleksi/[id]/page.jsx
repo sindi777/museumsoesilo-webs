@@ -2,50 +2,50 @@
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-
-// Data dummy (bisa diganti dengan API/database nanti)
-const koleksiData = [
-  {
-    id: 1,
-    gambar: '/koleksi/unggulan1.jpg',
-    nama: 'Ruangan Utama',
-    deskripsi: `Ruangan utama berisi berbagai barang pribadi milik keluarga bapak Soesilo Soedarman.`,
-    detail: `Barang-barang ini mencerminkan perjalanan hidup beliau sejak masa kecil, pendidikan, hingga karier sebagai tokoh nasional.`,
-    pembuat: 'Keluarga Soedarman',
-    tahun: 'Abad 20',
-  },
-  {
-    id: 2,
-    gambar: '/koleksi/unggulan2.jpg',
-    nama: 'Dokumentasi Karier',
-    deskripsi: `Dokumentasi perjalanan karier militer dan diplomatik beliau.`,
-    detail: `Terdapat foto-foto, piagam, surat tugas, serta benda-benda resmi saat beliau menjabat.`,
-    pembuat: 'Arsip Nasional',
-    tahun: '1980-an',
-  },
-  {
-    id: 3,
-    gambar: '/koleksi/unggulan3.jpg',
-    nama: 'Koleksi Pribadi',
-    deskripsi: `Koleksi pribadi seperti seragam, medali, dan benda bersejarah lainnya.`,
-    detail: `Setiap item memiliki nilai historis dan simbolik, mencerminkan dedikasi dan jasa beliau bagi negara.`,
-    pembuat: 'Soesilo Soedarman',
-    tahun: '1960–1990',
-  },
-]
+import { useEffect, useState } from 'react'
 
 export default function DetailKoleksi({ params }) {
   const router = useRouter()
   const { id } = params
 
-  const item = koleksiData.find(k => k.id === parseInt(id))
+  const [item, setItem] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(`/api/koleksi/${id}`)
+        if (!res.ok) throw new Error('Data tidak ditemukan')
+        const data = await res.json()
+        setItem(data)
+      } catch (error) {
+        setItem(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [id])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-xl bg-white">
+        Memuat...
+      </div>
+    )
+  }
 
   if (!item) {
-    return <div className="min-h-screen flex items-center justify-center text-xl">Koleksi tidak ditemukan.</div>
+    return (
+      <div className="min-h-screen flex items-center justify-center text-xl bg-white">
+        Koleksi tidak ditemukan.
+      </div>
+    )
   }
 
   return (
-    <section className="min-h-screen bg-[#EFE7DF] px-4 py-8 md:px-12 lg:px-20">
+    <section className="min-h-screen bg-white px-4 py-8 md:px-12 lg:px-20">
       {/* Tombol kembali */}
       <button
         onClick={() => router.back()}
@@ -54,10 +54,9 @@ export default function DetailKoleksi({ params }) {
         ←
       </button>
 
-<div className="shadow rounded-lg p-6 flex flex-col md:flex-row gap-6">
-
+      <div className="bg-white rounded-lg p-6 flex flex-col md:flex-row gap-6">
         {/* Gambar koleksi */}
-        <div className="md:w-1/2 w-full flex justify-center">
+        <div className="md:w-1/2 w-full flex justify-center bg-white">
           <Image
             src={item.gambar}
             alt={item.nama}
@@ -68,15 +67,10 @@ export default function DetailKoleksi({ params }) {
         </div>
 
         {/* Deskripsi koleksi */}
-        <div className="md:w-1/2 w-full text-gray-800">
+        <div className="md:w-1/2 w-full text-gray-800 bg-white">
           <h2 className="text-xl font-bold mb-2">{item.nama}</h2>
           <p className="text-sm mb-4 text-justify leading-relaxed">{item.deskripsi}</p>
           <p className="text-sm mb-4 text-justify leading-relaxed">{item.detail}</p>
-
-          <div className="mt-4 text-sm">
-            <p><strong>Pembuat:</strong> {item.pembuat}</p>
-            <p><strong>Tahun Pembuatan:</strong> {item.tahun}</p>
-          </div>
         </div>
       </div>
     </section>

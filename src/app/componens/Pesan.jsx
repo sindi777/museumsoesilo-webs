@@ -14,7 +14,7 @@ export default function Pesan() {
     return
   }
 
-  setLoading(true) // ⏳ mulai loading
+  setLoading(true) 
 
   try {
     const res = await fetch('/api/pesan', {
@@ -42,7 +42,7 @@ export default function Pesan() {
 
 
   return (
-    <section id="contact" className="bg-[#F3E8DC] py-16 px-6">
+    <section id="contact" className="bg-[#FFFFF] py-16 px-6">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold text-[#3B2C24]">Connect with us</h2>
         <p className="mt-4 text-base md:text-lg text-gray-700">
@@ -78,7 +78,6 @@ export default function Pesan() {
               <span>
                 Senin - Jumat: 08.00 - 16.00 WIB<br />
                 Sabtu - Minggu: 09.00 - 14.00 WIB<br />
-                Hari Libur Nasional: Tutup
               </span>
             </p>
           </div>
