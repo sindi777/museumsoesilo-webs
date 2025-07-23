@@ -1,6 +1,10 @@
 import { prisma } from '@/lib/prisma'
-import { writeFile } from 'fs/promises'
-import path from 'path'
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY // pakai service role agar bisa upload
+)
 
 export async function POST(request) {
   try {
@@ -11,11 +15,25 @@ export async function POST(request) {
     const buffer = Buffer.from(base64Data, 'base64')
 
     const fileName = `${Date.now()}.png`
-    const filePath = path.join(process.cwd(), 'public', 'uploads', fileName)
+    const { data, error } = await supabase.storage
+      .from('koleksi') // nama bucket
+      .upload(`images/${fileName}`, buffer, {
+        contentType: 'image/png',
+      })
 
-    await writeFile(filePath, buffer)
+    if (error) {
+      console.error('Supabase upload error:', error)
+      return new Response(JSON.stringify({ error: 'Upload ke Supabase gagal' }), {
+        status: 500,
+      })
+    }
 
-    const imagePath = `/uploads/${fileName}`
+    const { data: publicUrlData } = supabase
+      .storage
+      .from('koleksi')
+      .getPublicUrl(`images/${fileName}`)
+
+    const imagePath = publicUrlData.publicUrl
 
     await prisma.koleksi.create({
       data: {
@@ -29,24 +47,5 @@ export async function POST(request) {
   } catch (error) {
     console.error('Upload error:', error)
     return new Response(JSON.stringify({ error: 'Upload gagal' }), { status: 500 })
-  }
-}
-
-
-export async function GET() {
-  try {
-    const koleksiList = await prisma.koleksi.findMany({
-      orderBy: { createdAt: 'desc' },
-    })
-
-    return new Response(JSON.stringify(koleksiList), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    })
-  } catch (error) {
-    console.error('Fetch error:', error)
-    return new Response(JSON.stringify({ error: 'Gagal mengambil data' }), {
-      status: 500,
-    })
   }
 }

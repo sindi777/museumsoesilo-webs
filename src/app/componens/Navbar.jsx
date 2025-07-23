@@ -13,7 +13,8 @@ export default function Navbar() {
  
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-[#FFFFFF] text-[#1E1E1E] font-sans shadow-md z-50">
+    <header className="fixed top-0 left-0 w-full bg-white/30 backdrop-blur-md text-[#1E1E1E] font-sans shadow-md z-50">
+
       <nav className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
         {/* Logo & Title */}
         <div className="flex items-center gap-4">
