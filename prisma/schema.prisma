@@ -31,6 +31,7 @@ model Koleksi {
   gambar    String
   pembuat   String?
   tahun     String?
+  createdAt DateTime @default(now())
 }
 
 model Pesan {
