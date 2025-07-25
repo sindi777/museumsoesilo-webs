@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import FormKoleksi from './form'
+import { FaEdit, FaTrash, FaPlusCircle, FaBoxOpen } from 'react-icons/fa'
 
 export default function KoleksiClient({ koleksiList }) {
   const [showForm, setShowForm] = useState(false)
@@ -42,17 +43,19 @@ export default function KoleksiClient({ koleksiList }) {
 
   return (
     <div className="space-y-10">
-      <h1 className="text-2xl font-bold">Manajemen Koleksi</h1>
-
-      <button
-        onClick={() => {
-          setEditingItem(null)
-          setShowForm(!showForm)
-        }}
-        className="bg-[#3B2C24] text-white px-4 py-2 rounded hover:bg-[#4b3830]"
-      >
-        {showForm ? 'Tutup Form' : 'Tambah Koleksi'}
-      </button>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-[#33231A]">📦 Manajemen Koleksi</h1>
+        <button
+          onClick={() => {
+            setEditingItem(null)
+            setShowForm(!showForm)
+          }}
+          className="flex items-center gap-2 bg-[#3B2C24] text-white px-4 py-2 rounded shadow hover:bg-[#4b3830] transition"
+        >
+          <FaPlusCircle />
+          {showForm ? 'Tutup Form' : 'Tambah Koleksi'}
+        </button>
+      </div>
 
       {showForm && (
         <FormKoleksi
@@ -62,7 +65,8 @@ export default function KoleksiClient({ koleksiList }) {
       )}
 
       {koleksiList.length === 0 ? (
-        <div className="text-center text-gray-600 italic">
+        <div className="text-center text-gray-500 italic mt-10">
+          <FaBoxOpen className="text-4xl mx-auto mb-2" />
           Belum ada koleksi tersedia.
         </div>
       ) : (
@@ -70,31 +74,29 @@ export default function KoleksiClient({ koleksiList }) {
           {koleksiList.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-xl shadow-md overflow-hidden border flex flex-col"
+              className="bg-white rounded-xl shadow-lg overflow-hidden border hover:shadow-2xl transition-all duration-300"
             >
               <img
                 src={item.gambar}
                 alt={item.nama}
-                className="w-full h-48 object-cover"
+                className="w-full h-48 object-cover hover:scale-105 transition-transform duration-200"
               />
-              <div className="p-4 space-y-2 flex-grow">
-                <h2 className="text-lg font-semibold text-[#3B2C24]">
-                  {item.nama}
-                </h2>
-                <p className="text-sm text-gray-600">{item.deskripsi}</p>
+              <div className="p-4 space-y-2">
+                <h2 className="text-lg font-semibold text-[#3B2C24] line-clamp-1">{item.nama}</h2>
+                <p className="text-sm text-gray-600 line-clamp-2">{item.deskripsi}</p>
               </div>
-              <div className="flex">
+              <div className="flex divide-x border-t">
                 <button
                   onClick={() => handleEdit(item)}
-                  className="w-1/2 bg-[#33231A] text-white text-sm font-semibold px-4 py-2 hover:bg-[#4B3A30] transition"
+                  className="w-1/2 flex items-center justify-center gap-2 text-sm font-semibold text-white py-2 bg-[#33231A] hover:bg-[#4B3A30] transition"
                 >
-                  Edit
+                  <FaEdit /> Edit
                 </button>
                 <button
                   onClick={() => handleDelete(item.id)}
-                  className="w-1/2 bg-[#B80003] text-white text-sm font-semibold px-4 py-2 hover:bg-[#8e0002] transition"
+                  className="w-1/2 flex items-center justify-center gap-2 text-sm font-semibold text-white py-2 bg-[#B80003] hover:bg-[#8e0002] transition"
                 >
-                  Hapus
+                  <FaTrash /> Hapus
                 </button>
               </div>
             </div>

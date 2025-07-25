@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma'
 
-export async function GET(req, { params }) {
+export async function GET(req, context) {
+  const { params } = await context // ✅ await context dulu
   const koleksiId = Number(params.id)
 
   if (isNaN(koleksiId)) {
@@ -27,7 +28,8 @@ export async function GET(req, { params }) {
   }
 }
 
-export async function PUT(req, { params }) {
+export async function PUT(req, context) {
+  const { params } = await context // ✅ await context dulu
   const koleksiId = Number(params.id)
 
   if (isNaN(koleksiId)) {

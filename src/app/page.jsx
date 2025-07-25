@@ -44,12 +44,17 @@ export default function Home() {
       <Footer/>
 
       {isVisible && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-5 right-5 p-3 rounded-full bg-[#d6ccc2] text-[#33231A] shadow-lg hover:bg-[#33231A] transition duration-300"
-        >
-          ↑
-        </button>
+<button
+  onClick={scrollToTop}
+  className="fixed bottom-5 right-5 p-3 rounded-full 
+             bg-[#d6ccc2]/20 backdrop-blur-md 
+             border border-white/30 text-[#33231A] 
+             shadow-lg hover:bg-[#33231A]/50 hover:text-white 
+             transition duration-300"
+>
+  ↑
+</button>
+
       )}
     </main>
   );

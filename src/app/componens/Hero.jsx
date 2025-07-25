@@ -10,7 +10,7 @@ export default function Hero() {
   return (
    <section id="hero" className="relative w-full h-screen pt-2 sm:h-[500px] md:h-[600px] lg:h-[700px]">
       <Image
-        src="/koleksi2b.jpg"
+        src="/pesawatdepan.png"
         alt="Museum Soesilo"
         fill
         className="object-cover"

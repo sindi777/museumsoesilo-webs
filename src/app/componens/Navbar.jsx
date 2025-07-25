@@ -1,85 +1,89 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { useSession, signOut } from 'next-auth/react'
+import { useState } from 'react'
 import Link from 'next/link'
+import { FaBars, FaTimes } from 'react-icons/fa'
 
 export default function Navbar() {
-  const { data: session, status } = useSession()
   const [isOpen, setIsOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
- 
+  const menuItems = [
+    { label: 'BERANDA', href: '/' },
+    { label: 'KOLEKSI', href: '/detail-koleksi' },
+    { label: 'UMPAN BALIK', href: '#contact' },
+    { label: 'INFORMASI MUSEUM', href: '/detail-informasi' },
+  ]
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white/30 backdrop-blur-md text-[#1E1E1E] font-sans shadow-md z-50">
+    <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white/10 backdrop-blur-md shadow-md rounded-full max-w-6xl w-[95%] px-6">
 
-      <nav className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
+      <nav className="flex items-center justify-between py-4">
         {/* Logo & Title */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-5 min-w-[220px]">
           <Image
             src="/logo2.png"
-            alt="museumsoesilo"
+            alt="museum-logo"
             width={40}
             height={40}
-            className="object-contain rounded-full"
+            className="rounded-full"
           />
-          <h1 className="text-base md:text-xl font-bold whitespace-nowrap">
+          <h1 className="text-lg md:text-xl font-bold text-gray-900 whitespace-nowrap tracking-wide">
             MUSEUM SOESILO SOEDARMAN
           </h1>
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-6 items-center font-semibold text-sm md:text-base">
-          <li><a href="/" className="hover:underline">Beranda</a></li>
-          <li><a href="/detail-koleksi" className="hover:underline">Koleksi</a></li>
-          <li><a href="#contact" className="hover:underline">Umpan Balik</a></li>
-          <li><a href="/detail-informasi" className="hover:underline">Informasi Museum</a></li>
+        <ul className="hidden md:flex gap-x-10 items-center font-semibold text-gray-800 text-sm md:text-[13px] whitespace-nowrap">
+          {menuItems.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} className="relative group transition">
+                <span className="group-hover:text-blue-800 transition">{item.label}</span>
+                <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-blue-800 group-hover:w-full transition-all duration-300 ease-in-out"></span>
+              </Link>
+            </li>
+          ))}
           <li>
             <Link
-                href="/login"
-                className="bg-black text-white px-4 py-2 rounded-full hover:scale-105 transition"
-              >
-                Login
-              </Link>
+              href="/login"
+              className="bg-black text-white px-5 py-2 rounded-full hover:scale-105 active:scale-95 transition-transform duration-150 ease-in-out"
+            >
+              Login
+            </Link>
           </li>
         </ul>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Menu Icon */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 text-xl"
+          className="md:hidden text-2xl text-gray-800 focus:outline-none"
+          aria-label="Toggle menu"
         >
-          ☰
+          {isOpen ? <FaTimes /> : <FaBars />}
         </button>
       </nav>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Dropdown Menu */}
       {isOpen && (
-        <ul className="md:hidden px-4 pb-4 space-y-2 font-semibold text-sm">
-          <li><a href="/" className="block hover:underline">Beranda</a></li>
-          <li><a href="/detail-koleksi" className="block hover:underline">Koleksi</a></li>
-          <li><a href="#contact" className="block hover:underline">Umpan Balik</a></li>
-          <li><a href="/detail-informasi" className="block hover:underline">Informasi Museum</a></li>
-          <li>
-            {isLoggedIn ? (
-              <button
-                onClick={handleLogout}
-                className="bg-red-600 text-white px-4 py-2 w-full block text-center rounded-full mt-2"
-              >
-                Logout
-              </button>
-            ) : (
-              <a
-                href="/login"
-                className="bg-black text-white px-4 py-2 w-full block text-center rounded-full mt-2"
-              >
-                Login
-              </a>
-            )}
-          </li>
-        </ul>
+        <div className="md:hidden bg-white/30 backdrop-blur-md px-6 pb-6 pt-2 space-y-3 shadow-lg rounded-b-xl">
+          {menuItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="block text-sm font-medium text-gray-800 hover:text-blue-800 transition"
+              onClick={() => setIsOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            href="/login"
+            onClick={() => setIsOpen(false)}
+            className="inline-block bg-black text-white text-center w-full py-2 rounded-full mt-2 hover:bg-gray-800 active:scale-95 transition-transform duration-150 ease-in-out"
+          >
+            Login
+          </Link>
+        </div>
       )}
     </header>
   )
