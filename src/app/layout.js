@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* ✅ Script Hotjar */}
+        {/*Script Hotjar */}
         <Script id="hotjar-init" strategy="afterInteractive">
   {`
     (function(h,o,t,j,a,r){
