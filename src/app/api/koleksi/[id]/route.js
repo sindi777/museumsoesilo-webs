@@ -65,9 +65,8 @@ export async function PUT(req, context) {
 }
 
 // DELETE: Hapus koleksi berdasarkan ID
-export async function PUT(req, { params }) {
+export async function DELETE(req, { params }) {
   const koleksiId = Number(params.id)
-
 
   if (isNaN(koleksiId)) {
     return new Response(JSON.stringify({ message: 'ID tidak valid' }), { status: 400 })
