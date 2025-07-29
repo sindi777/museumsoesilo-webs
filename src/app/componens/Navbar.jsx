@@ -28,9 +28,10 @@ export default function Navbar() {
             height={40}
             className="rounded-full"
           />
-          <h1 className="text-lg md:text-xl font-bold text-gray-900 whitespace-nowrap tracking-wide">
-            MUSEUM SOESILO SOEDARMAN
-          </h1>
+          <h1 className="text-sm sm:text-base md:text-lg font-bold text-gray-800 whitespace-nowrap tracking-wide">
+  MUSEUM SOESILO SOEDARMAN
+</h1>
+
         </div>
 
         {/* Desktop Menu */}

@@ -1,8 +1,6 @@
-import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
-
-export async function DELETE(req, { params }) {
+export async function DELETE(req, context) {
   try {
+    const { params } = context 
     const id = Number(params.id)
 
     if (isNaN(id)) {

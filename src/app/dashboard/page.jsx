@@ -56,16 +56,15 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div>
-
-        <div className="bg-white rounded-xl shadow-lg p-6 hover:scale-[1.02] transition-all">
-          <div className="flex items-center gap-4 mb-2">
-            <FaInbox className="text-3xl text-[#6C3D2F]" />
-            <div>
-              <h3 className="text-2xl font-bold">{totalPesan}</h3>
-              <p className="text-sm text-gray-600">Pesan Masuk</p>
-            </div>
-          </div>
-        </div>
+<div className="bg-white rounded-xl shadow-lg p-6 hover:scale-[1.02] transition-all">
+    <div className="flex items-center gap-4 mb-2">
+      <FaInbox className="text-3xl text-[#6C3D2F]" />
+      <div>
+        <h3 className="text-2xl font-bold">{totalPesan}</h3>
+        <p className="text-sm text-gray-600">Pesan Masuk</p>
+      </div>
+    </div>
+  </div>
       </div>
 
       {/* Kritik & Saran */}
@@ -91,7 +90,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Log Aktivitas */}
-      <div className="bg-white rounded-xl shadow-md p-6">
+      {/* <div className="bg-white rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
           <FaHistory /> Aktivitas Admin Terakhir
         </h2>
@@ -116,7 +115,7 @@ export default function AdminDashboard() {
         ) : (
           <p className="text-sm italic text-gray-500">Belum ada aktivitas tercatat.</p>
         )}
-      </div>
+      </div> */}
     </div>
   )
 }

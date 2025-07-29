@@ -56,7 +56,7 @@ export default function Pesan() {
       </div>
 
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
-        {/* Kiri: Info */}
+        {/* Kiri*/}
         <div className="bg-white/60 backdrop-blur-sm p-6 rounded-xl shadow-lg space-y-6 text-[#3B2C24] text-base border border-white/40 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
           <div>
             <h3 className="font-semibold text-lg mb-1 flex items-center gap-2">
@@ -86,7 +86,7 @@ export default function Pesan() {
             <h3 className="font-semibold text-lg mb-1 flex items-center gap-2">
               <FaClock /> Jam Operasional
             </h3>
-            <p>Setiap Hari: 08.00 - 16.00 WIB</p>
+            <p>Setiap Hari: 09.00 - 16.00 WIB</p>
           </div>
 
           <div>
@@ -103,7 +103,7 @@ export default function Pesan() {
           </div>
         </div>
 
-        {/* Kanan: Formulir */}
+        {/* Kanan */}
         <div className="bg-white p-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
           {status === 'success' && (
             <div className="bg-green-100 text-green-800 px-4 py-2 rounded mb-4 transition-opacity duration-500">
