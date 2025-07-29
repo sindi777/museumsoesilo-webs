@@ -5,7 +5,7 @@ import { Viewer } from '@photo-sphere-viewer/core'
 import 'photo-sphere-viewer/dist/photo-sphere-viewer.css'
 
 export default function PanoramaViewer() {
-  const containerRef = useRef(null) // ini membungkus semuanya
+  const containerRef = useRef(null) 
   const viewerRef = useRef(null)
   const [viewer, setViewer] = useState(null)
   const [currentIndex, setCurrentIndex] = useState(0)

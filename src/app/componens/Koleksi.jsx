@@ -59,8 +59,6 @@ export default function Koleksi() {
                       height={650}
                       className="w-full h-72 object-cover rounded-xl transition-transform duration-500 ease-in-out hover:scale-110"
                     />
-                    {/* Jika ingin overlay gradient, aktifkan ini */}
-                    {/* <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-xl pointer-events-none"></div> */}
                   </div>
                   <p className="text-black bg-white/70 backdrop-blur-sm p-4 rounded-lg text-base leading-relaxed font-sans">
                     {item.deskripsi}
