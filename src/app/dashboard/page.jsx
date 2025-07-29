@@ -11,29 +11,30 @@ export default function AdminDashboard() {
   const [logAktivitas, setLogAktivitas] = useState([])
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [koleksiRes, pesanRes, logRes] = await Promise.all([
-          fetch('/api/koleksi'),
-          fetch('/api/pesan'),
-          fetch('/api/logs'),
-        ])
+  const fetchData = async () => {
+    try {
+      const [koleksiRes, pesanRes, logRes] = await Promise.all([
+        fetch('/api/koleksi', { cache: 'no-store' }), // <--- ini penting
+        fetch('/api/pesan', { cache: 'no-store' }),
+        fetch('/api/logs', { cache: 'no-store' }),
+      ])
 
-        const koleksiData = await koleksiRes.json()
-        const pesanData = await pesanRes.json()
-        const logData = await logRes.json()
+      const koleksiData = await koleksiRes.json()
+      const pesanData = await pesanRes.json()
+      const logData = await logRes.json()
 
-        setTotalKoleksi(koleksiData.length)
-        setTotalPesan(pesanData.length)
-        setKritikSaran(pesanData.slice(-2).reverse())
-        setLogAktivitas(logData.slice(0, 5))
-      } catch (err) {
-        console.error('Gagal mengambil data dashboard:', err)
-      }
+      setTotalKoleksi(koleksiData.length)
+      setTotalPesan(pesanData.length)
+      setKritikSaran(pesanData.slice(-2).reverse())
+      setLogAktivitas(logData.slice(0, 5))
+    } catch (err) {
+      console.error('Gagal mengambil data dashboard:', err)
     }
+  }
 
-    fetchData()
-  }, [])
+  fetchData()
+}, [])
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F3E8DC] to-[#F0D8C4] px-4 py-8 sm:px-6 lg:px-12 text-[#1E1E1E] font-sans">

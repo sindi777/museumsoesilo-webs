@@ -1,7 +1,8 @@
 import { prisma } from '@/lib/prisma'
 
-// Ambil data koleksi berdasarkan ID
-export async function GET(req, { params }) {
+// GET: Ambil data koleksi berdasarkan ID
+export async function GET(req, context) {
+  const { params } = context
   const koleksiId = Number(params.id)
 
   if (isNaN(koleksiId)) {
@@ -29,8 +30,9 @@ export async function GET(req, { params }) {
   }
 }
 
-// Perbarui data koleksi
-export async function PUT(req, { params }) {
+// PUT: Perbarui data koleksi
+export async function PUT(req, context) {
+  const { params } = context
   const koleksiId = Number(params.id)
 
   if (isNaN(koleksiId)) {
@@ -62,9 +64,10 @@ export async function PUT(req, { params }) {
   }
 }
 
-// Hapus koleksi berdasarkan ID
-export async function DELETE(req, { params }) {
+// DELETE: Hapus koleksi berdasarkan ID
+export async function PUT(req, { params }) {
   const koleksiId = Number(params.id)
+
 
   if (isNaN(koleksiId)) {
     return new Response(JSON.stringify({ message: 'ID tidak valid' }), { status: 400 })

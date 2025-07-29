@@ -29,8 +29,8 @@ export async function POST(request) {
     const buffer = Buffer.from(base64Data, 'base64')
 
     const fileName = `${Date.now()}.png`
-    const { data, error } = await supabase.storage
-      .from('koleksi') // nama bucket
+    const { error } = await supabase.storage
+      .from('koleksi')
       .upload(`images/${fileName}`, buffer, {
         contentType: 'image/png',
       })
@@ -49,7 +49,7 @@ export async function POST(request) {
 
     const imagePath = publicUrlData.publicUrl
 
-    await prisma.koleksi.create({
+    await prisma.Koleksi.create({
       data: {
         nama,
         deskripsi,

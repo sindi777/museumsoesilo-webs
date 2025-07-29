@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 export default function Koleksi() {
@@ -52,11 +51,9 @@ export default function Koleksi() {
                   onClick={() => router.push(`/list-koleksi/${item.id}`)}
                 >
                   <div className="relative overflow-hidden rounded-xl mb-5">
-                    <Image
+                    <img
                       src={item.gambar}
                       alt={`Koleksi ${item.id}`}
-                      width={400}
-                      height={650}
                       className="w-full h-72 object-cover rounded-xl transition-transform duration-500 ease-in-out hover:scale-110"
                     />
                   </div>
