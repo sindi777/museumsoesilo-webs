@@ -14,7 +14,7 @@ export default function AdminDashboard() {
   const fetchData = async () => {
     try {
       const [koleksiRes, pesanRes, logRes] = await Promise.all([
-        fetch('/api/koleksi', { cache: 'no-store' }), // <--- ini penting
+        fetch('/api/koleksi', { cache: 'no-store' }),
         fetch('/api/pesan', { cache: 'no-store' }),
         fetch('/api/logs', { cache: 'no-store' }),
       ])
