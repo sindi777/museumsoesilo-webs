@@ -49,7 +49,7 @@ export default function Pesan() {
       className="bg-white py-16 px-4 transition-all"
     >
       <div className="text-center mb-10">
-        <h2 className="text-4xl font-bold text-[#3B2C24] drop-shadow-md">
+        <h2 className="text-4xl font-bold text-[#FFFFF] drop-shadow-md">
           Connect With Us
         </h2>
         <p className="text-gray-600 mt-2">Silakan berikan kritik dan saran anda</p>
