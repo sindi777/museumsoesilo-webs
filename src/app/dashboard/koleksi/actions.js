@@ -19,23 +19,25 @@ const convertToBase64 = (file) => {
 };
 
 export async function addOrEditKoleksi(formData) {
-  const id = formData.get("id");
+  const idString = formData.get("id"); // 1. Ambil id sebagai string
   const nama = formData.get("nama");
   const deskripsi = formData.get("deskripsi");
   const gambarFile = formData.get("gambar");
 
-  let gambar = formData.get("gambarLama"); // Ambil gambar lama jika ada
+  let gambar = formData.get("gambarLama");
 
-  // Jika ada file gambar baru yang di-upload, konversi ke base64
   if (gambarFile && gambarFile.size > 0) {
     gambar = await convertToBase64(gambarFile);
   }
 
   try {
-    if (id) {
+    if (idString) {
+      // 2. Jika sedang mode edit (idString ada)
+      const id = parseInt(idString, 10); // 3. UBAH STRING MENJADI ANGKA
+
       // Logic untuk Edit
       await prisma.koleksi.update({
-        where: { id },
+        where: { id: id }, // 4. Gunakan id yang sudah menjadi angka
         data: { nama, deskripsi, gambar },
       });
     } else {
@@ -45,13 +47,18 @@ export async function addOrEditKoleksi(formData) {
       });
     }
   } catch (error) {
-    console.error("Gagal menyimpan koleksi:", error);
-    // Anda bisa melempar error di sini untuk ditangani di UI jika perlu
-    throw new Error("Gagal menyimpan data koleksi.");
+    console.error("DETAIL ERROR PRISMA:", error);
+    if (error.code === "P2025") {
+      throw new Error(
+        `Gagal memperbarui: Koleksi dengan ID yang diberikan tidak ditemukan.`
+      );
+    }
+    throw new Error(
+      `Terjadi kesalahan pada database saat mencoba menyimpan koleksi.`
+    );
   }
 
-  revalidatePath("/koleksi"); // Ini akan me-refresh data di halaman /koleksi
-  // redirect('/koleksi') // Opsional, jika Anda ingin redirect setelah submit
+  revalidatePath("/dashboard/koleksi"); // Pastikan path ini sesuai dengan URL Anda
 }
 
 export async function deleteKoleksi(id) {
