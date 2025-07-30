@@ -8,6 +8,14 @@ export default function Koleksi() {
   const [koleksiList, setKoleksiList] = useState([])
   const [loading, setLoading] = useState(true)
 
+  const truncate = (text, maxWords = 20) => {
+    const words = text.split(' ')
+    if (words.length > maxWords) {
+      return words.slice(0, maxWords).join(' ') + '...'
+    }
+    return text
+  }
+
   useEffect(() => {
     const fetchKoleksi = async () => {
       try {
@@ -53,12 +61,15 @@ export default function Koleksi() {
                   <div className="relative overflow-hidden rounded-xl mb-5">
                     <img
                       src={item.gambar}
-                      alt={`Koleksi ${item.id}`}
+                      alt={`Koleksi ${item.nama}`}
                       className="w-full h-72 object-cover rounded-xl transition-transform duration-500 ease-in-out hover:scale-110"
                     />
                   </div>
+                  <h3 className="text-xl font-bold text-black mb-2">
+                    {item.nama}
+                  </h3>
                   <p className="text-black bg-white/70 backdrop-blur-sm p-4 rounded-lg text-base leading-relaxed font-sans">
-                    {item.deskripsi}
+                    {truncate(item.deskripsi, 20)}
                   </p>
                 </div>
               ))

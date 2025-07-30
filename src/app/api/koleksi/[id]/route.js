@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma'
 
-// GET: Ambil data koleksi berdasarkan ID
+
 export async function GET(req, context) {
   const { params } = context
   const koleksiId = Number(params.id)
@@ -30,7 +30,7 @@ export async function GET(req, context) {
   }
 }
 
-// PUT: Perbarui data koleksi
+
 export async function PUT(req, context) {
   const { params } = context
   const koleksiId = Number(params.id)
@@ -64,7 +64,7 @@ export async function PUT(req, context) {
   }
 }
 
-// DELETE: Hapus koleksi berdasarkan ID
+
 export async function DELETE(req, { params }) {
   const koleksiId = Number(params.id)
 
